@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { UsersModule } from './users/users.module';
 import { ConversationsModule } from './conversations/conversations.module';
+import { ParticipantModule } from './participant/participant.module';
 import entities from './utils/typeorm';
 
 @Module({
@@ -29,6 +30,7 @@ import entities from './utils/typeorm';
       synchronize: true,
     }),
     ConversationsModule,
+    ParticipantModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService],
