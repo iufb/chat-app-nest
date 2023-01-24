@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import { User } from './typeorm';
 
 export type CreateUserDetails = {
@@ -18,18 +19,15 @@ export type FindUser = Partial<{
 }>;
 
 export type CreateConversationParams = {
-  authorId: number;
   recipientId: number;
   message: string;
 };
 
-export type FindParticipantParams = Partial<{
-  id: number;
-}>;
-
-export type CreateParticipantParams = {
-  id: number;
-};
 export interface AuthenticatedRequest extends Request {
   user: User;
 }
+export type CreateMessageParams = {
+  content: string;
+  conversationId: number;
+  user: User;
+};

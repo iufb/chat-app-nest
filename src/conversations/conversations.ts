@@ -1,11 +1,8 @@
-import { Conversation, Participant, User } from 'src/utils/typeorm';
+import { Conversation, User } from 'src/utils/typeorm';
 import { CreateConversationParams } from 'src/utils/types';
 
 export interface IConversations {
-  createConversation(
-    createConversationParams: CreateConversationParams,
-    user: User,
-  );
-  find(id: number): Promise<Participant>;
+  createConversation(user: User, conversationParams: CreateConversationParams);
+  getConversations(id: number): Promise<Conversation[]>;
   findConversationById(id: number): Promise<Conversation>;
 }

@@ -14,6 +14,7 @@ import { Request, Response } from 'express';
 import { CreateUser } from 'src/dtos/CreateUser.dto';
 import { IUserService } from 'src/users/user';
 import { Services } from 'src/utils/constants';
+import { AuthenticatedRequest } from 'src/utils/types';
 import { IAuthUService } from './auth';
 import { AuthenticatedGuard, LocalAuthGuard } from './utils/Guards';
 
@@ -42,5 +43,14 @@ export class AuthController {
   status(@Req() req: Request, @Res() res: Response) {
     console.log(req.user, 'status');
     res.send(req.user);
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('logout')
+  logout(@Req() req: AuthenticatedRequest, @Res() res: Response) {
+    req.session.destroy((error) => {
+      error ? res.sendStatus(400) : res.sendStatus(200);
+      console.log('logout');
+    });
   }
 }
